@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button.jsx";
 import {
   Card,
@@ -26,8 +27,9 @@ import {
 import { motion } from "framer-motion";
 import mukawaLogo from "./assets/logobg3.png";
 import "./App.css";
+import DeleteAccountRequest from "./pages/DeleteAccountRequest.jsx";
 
-function App() {
+function HomePage() {
   const [showPrivacyDetails, setShowPrivacyDetails] = useState(false);
 
   const features = [
@@ -63,7 +65,7 @@ function App() {
       items: [
         "Camera: Used only for barcode scanning, no video recording or transmission",
         "Barcode/Product Data: Temporary processing to fetch product details from public databases",
-        "Usage Data: Analytics and crash reports to improve app stability and features",
+        "Usage Data: Analytics and crash reports to improve the app’s stability and features",
       ],
     },
     {
@@ -75,11 +77,34 @@ function App() {
       ],
     },
     {
+      title: "Sharing and third parties",
+      items: [
+        "We may share data with third-party service providers that help operate the app (e.g., product database APIs, AI services, crash analytics). We do not sell your personal information.",
+      ],
+    },
+    {
+      title: "Images and uploads",
+      items: [
+        "By default, camera frames used for scanning are processed locally and are not uploaded. If the app prompts you to upload an image or product photo, we will notify you and request consent before any upload.",
+      ],
+    },
+    {
+      title: "Data retention & security",
+      items: [
+        "We retain data only as long as needed to provide the service or as required by law. We take reasonable measures to protect data, but no system is completely secure.",
+      ],
+    },
+    {
       title: "Your choices",
       items: [
-        "Control camera permissions in device settings",
-        "Request data deletion anytime",
-        "Opt-out of analytics if desired",
+        "You can remove the app’s permission to use the camera in your device settings, but then barcode scanning will be disabled.",
+        "You can contact us to request deletion of any account data at: Jehadmukahal1@gmail.com",
+      ],
+    },
+    {
+      title: "Contact",
+      items: [
+        "If you have questions about this policy, contact us at: Jehadmukahal1@gmail.com",
       ],
     },
   ];
@@ -116,6 +141,12 @@ function App() {
             >
               Download
             </a>
+            <Link
+              to="/delete-account-request"
+              className="text-gray-600 hover:text-green-600 transition-colors"
+            >
+              Delete Account
+            </Link>
           </nav>
         </div>
       </header>
@@ -455,6 +486,14 @@ function App() {
                     Download
                   </a>
                 </li>
+                <li>
+                  <Link
+                    to="/delete-account-request"
+                    className="hover:text-white transition-colors"
+                  >
+                    Delete Account
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
@@ -476,6 +515,20 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/delete-account-request"
+          element={<DeleteAccountRequest />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
