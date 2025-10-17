@@ -23,6 +23,7 @@ import {
   Eye,
   Lock,
   Mail,
+  FileText,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import mukawaLogo from "./assets/logobg3.png";
@@ -31,6 +32,7 @@ import DeleteAccountRequest from "./pages/DeleteAccountRequest.jsx";
 
 function HomePage() {
   const [showPrivacyDetails, setShowPrivacyDetails] = useState(false);
+  const [showTermsDetails, setShowTermsDetails] = useState(false);
 
   const features = [
     {
@@ -109,6 +111,83 @@ function HomePage() {
     },
   ];
 
+  const termsSections = [
+    {
+      title: "Acceptance of Terms",
+      items: [
+        "By downloading, installing, or using the Mukawan mobile application, you agree to be bound by these Terms of Use.",
+        "If you do not agree to these terms, please do not use the application.",
+        "These terms constitute a legally binding agreement between you and Jehad Mukahhil.",
+      ],
+    },
+    {
+      title: "Description of Service",
+      items: [
+        "Mukawan is a mobile application that allows users to scan product barcodes to view ingredients, allergens, and AI-generated product summaries.",
+        "The service is provided 'as is' and we make no warranties about the accuracy, completeness, or reliability of the information provided.",
+        "Product information is sourced from third-party databases and may not always be current or accurate.",
+      ],
+    },
+    {
+      title: "User Responsibilities",
+      items: [
+        "You are responsible for ensuring the accuracy of your use of the application.",
+        "You must not use the application for any illegal or unauthorized purpose.",
+        "You agree to use the application in compliance with all applicable laws and regulations.",
+      ],
+    },
+    {
+      title: "Subscription Terms (if applicable)",
+      items: [
+        "Any premium features or subscriptions are subject to additional terms and pricing as displayed in the app.",
+        "Subscriptions may auto-renew unless cancelled before the renewal date.",
+        "You can manage your subscriptions through your device's app store settings.",
+      ],
+    },
+    {
+      title: "Intellectual Property",
+      items: [
+        "The Mukawan application and all its content, features, and functionality are owned by Jehad Mukahhil.",
+        "You may not copy, modify, distribute, or reverse engineer the application.",
+      ],
+    },
+    {
+      title: "Disclaimer of Warranties",
+      items: [
+        "The application is provided 'as is' without any warranties, express or implied.",
+        "We do not guarantee that the application will be error-free or continuously available.",
+        "Product information provided by the application should not replace professional medical or nutritional advice.",
+      ],
+    },
+    {
+      title: "Limitation of Liability",
+      items: [
+        "To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, or consequential damages.",
+        "Our total liability shall not exceed the amount you paid for the application, if any.",
+      ],
+    },
+    {
+      title: "Termination",
+      items: [
+        "We may terminate or suspend your access to the application at any time, with or without notice.",
+        "Upon termination, your right to use the application will cease immediately.",
+      ],
+    },
+    {
+      title: "Changes to Terms",
+      items: [
+        "We reserve the right to modify these terms at any time.",
+        "Continued use of the application after changes constitutes acceptance of the new terms.",
+      ],
+    },
+    {
+      title: "Contact Information",
+      items: [
+        "For questions about these Terms of Use, please contact us at: Jehadmukahal1@gmail.com",
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-white">
       {/* Header */}
@@ -134,6 +213,12 @@ function HomePage() {
               className="text-gray-600 hover:text-green-600 transition-colors"
             >
               Privacy
+            </a>
+            <a
+              href="#terms"
+              className="text-gray-600 hover:text-green-600 transition-colors"
+            >
+              Terms
             </a>
             <a
               href="#download"
@@ -175,6 +260,19 @@ function HomePage() {
               <Button
                 size="lg"
                 className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
+                onClick={() => {
+                  const appShowcaseSection =
+                    document.querySelector("#app-showcase");
+                  if (appShowcaseSection) {
+                    const elementPosition = appShowcaseSection.offsetTop;
+                    const offsetPosition = elementPosition - 100; // 100px offset from top
+
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
               >
                 <Download className="mr-2 h-5 w-5" />
                 Download Now
@@ -187,6 +285,19 @@ function HomePage() {
                 Learn More
               </Button>
             </div>
+            <motion.div
+              className="mt-8"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <p className="text-sm text-gray-500 font-medium">
+                Developed by{" "}
+                <span className="text-green-600 font-semibold">
+                  Jehad Mukahal
+                </span>
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -241,7 +352,10 @@ function HomePage() {
       </section>
 
       {/* App Showcase */}
-      <section className="py-20 px-4 bg-gradient-to-r from-green-600 to-green-700 text-white">
+      <section
+        id="app-showcase"
+        className="py-20 px-4 bg-gradient-to-r from-green-600 to-green-700 text-white"
+      >
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -262,6 +376,12 @@ function HomePage() {
                   variant="secondary"
                   size="lg"
                   className="bg-white text-green-600 hover:bg-gray-100"
+                  onClick={() =>
+                    window.open(
+                      "https://apps.apple.com/sa/app/mukawan/id6751318678",
+                      "_blank"
+                    )
+                  }
                 >
                   <Smartphone className="mr-2 h-5 w-5" />
                   App Store
@@ -270,6 +390,12 @@ function HomePage() {
                   variant="secondary"
                   size="lg"
                   className="bg-white text-green-600 hover:bg-gray-100"
+                  onClick={() =>
+                    window.open(
+                      "https://play.google.com/store/apps/details?id=com.jehad.myapp",
+                      "_blank"
+                    )
+                  }
                 >
                   <Smartphone className="mr-2 h-5 w-5" />
                   Google Play
@@ -409,6 +535,119 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Terms of Use Section */}
+      <section id="terms" className="py-20 px-4 bg-white">
+        <div className="container mx-auto max-w-4xl">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Terms of Use
+            </h2>
+            <p className="text-xl text-gray-600">
+              Please read these terms carefully before using the Mukawan
+              application.
+            </p>
+          </motion.div>
+
+          <Card className="mb-8">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <FileText className="h-6 w-6 text-green-600" />
+                  <CardTitle className="text-2xl">
+                    Terms of Use (EULA)
+                  </CardTitle>
+                </div>
+                <Button
+                  variant="ghost"
+                  onClick={() => setShowTermsDetails(!showTermsDetails)}
+                  className="text-green-600"
+                >
+                  <ChevronDown
+                    className={`h-5 w-5 transition-transform ${
+                      showTermsDetails ? "rotate-180" : ""
+                    }`}
+                  />
+                </Button>
+              </div>
+              <CardDescription>Last updated: 19/08/2025</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-6">
+                These Terms of Use ("Terms") govern your use of the Mukawan
+                mobile application. By using our app, you agree to these terms.
+                If you do not agree, please do not use the application.
+              </p>
+
+              {showTermsDetails && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="space-y-8">
+                    {termsSections.map((section, index) => (
+                      <div key={index}>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                          <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                          {section.title}
+                        </h3>
+                        <ul className="space-y-2">
+                          {section.items.map((item, itemIndex) => (
+                            <li key={itemIndex} className="text-gray-600 pl-7">
+                              • {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+
+                    <Separator />
+
+                    <div className="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                        <AlertTriangle className="h-5 w-5 text-yellow-600 mr-2" />
+                        Important Notice
+                      </h3>
+                      <p className="text-gray-700">
+                        Mukawan is a helpful tool to highlight potential
+                        allergens, high-sugar items, and unfamiliar additives —
+                        but it is not a replacement for medical or professional
+                        advice. Always check product labels and consult
+                        professionals for allergy or medical concerns.
+                      </p>
+                    </div>
+
+                    <div className="bg-blue-50 p-6 rounded-lg">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                        <Mail className="h-5 w-5 text-blue-600 mr-2" />
+                        Contact Us
+                      </h3>
+                      <p className="text-gray-600 mb-2">
+                        If you have questions about these Terms of Use, contact
+                        us at:
+                      </p>
+                      <a
+                        href="mailto:Jehadmukahal1@gmail.com"
+                        className="text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        Jehadmukahal1@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* Download Section */}
       <section id="download" className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center">
@@ -429,6 +668,12 @@ function HomePage() {
               <Button
                 size="lg"
                 className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
+                onClick={() =>
+                  window.open(
+                    "https://apps.apple.com/sa/app/mukawan/id6751318678",
+                    "_blank"
+                  )
+                }
               >
                 <Download className="mr-2 h-5 w-5" />
                 Download for iOS
@@ -436,6 +681,12 @@ function HomePage() {
               <Button
                 size="lg"
                 className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
+                onClick={() =>
+                  window.open(
+                    "https://play.google.com/store/apps/details?id=com.jehad.myapp",
+                    "_blank"
+                  )
+                }
               >
                 <Download className="mr-2 h-5 w-5" />
                 Download for Android
@@ -476,6 +727,14 @@ function HomePage() {
                     className="hover:text-white transition-colors"
                   >
                     Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#terms"
+                    className="hover:text-white transition-colors"
+                  >
+                    Terms of Use
                   </a>
                 </li>
                 <li>
